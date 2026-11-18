@@ -6,6 +6,7 @@ export const orcInfo: OpponentInfo = {
   name: 'Ork',
   title: 'Wojownik z północy',
   strength: 3,
+  maxStamina: 72,
   image: require('../../assets/enemies/orc.png'),
 };
 

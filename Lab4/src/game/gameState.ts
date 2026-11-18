@@ -1,16 +1,17 @@
-import { ENEMY_MAX_STAMINA, OpponentId } from '../enemies/types';
+import { OpponentId } from '../enemies/types';
 import { OPPONENTS, randomOpponent } from '../enemies';
 import { GameState, Move, Outcome, Phase } from './types';
 import { isMove } from './moves';
 
 export const STORAGE_KEY = 'lab4-fantasy-duel-v1';
 export const PLAYER_MAX_STAMINA = 100;
+const PREVIOUS_ENEMY_MAX_STAMINA = 72;
 
 export function createGame(opponentId = randomOpponent().id): GameState {
   return {
     opponentId,
     playerStamina: PLAYER_MAX_STAMINA,
-    enemyStamina: ENEMY_MAX_STAMINA,
+    enemyStamina: OPPONENTS[opponentId].maxStamina,
     round: 0,
     phase: 'ready',
     outcome: null,
@@ -60,10 +61,14 @@ export function restoreGame(value: string): GameState | null {
       return null;
     }
 
+    const restoredEnemyStamina =
+      data.enemyStamina === PREVIOUS_ENEMY_MAX_STAMINA
+        ? OPPONENTS[data.opponentId!].maxStamina
+        : Math.min(data.enemyStamina!, OPPONENTS[data.opponentId!].maxStamina);
     const enemyStamina =
       data.phase === 'enemyHit' && data.pendingDamage
-        ? Math.max(0, data.enemyStamina! - data.pendingDamage.amount)
-        : data.enemyStamina!;
+        ? Math.max(0, restoredEnemyStamina - data.pendingDamage.amount)
+        : restoredEnemyStamina;
     const outcome: Outcome | null = data.phase === 'enemyHit' && enemyStamina <= 0 ? 'victory' : data.outcome!;
 
     return {

@@ -7,6 +7,8 @@ Każdy nowy pojedynek losuje orka, goblina albo trolla; ten sam przeciwnik nie
 pojawia się dwa razy z rzędu. Stan wytrzymałości obu stron jest aktualizowany
 po każdym trafieniu, a po zakończeniu walki wyświetla się osobny ekran wyniku.
 Komponenty przeciwników znajdują się w `src/enemies/`.
+Wytrzymałość przeciwnika rośnie wraz z siłą: goblin 64/2, ork 72/3, troll 80/4
+(wytrzymałość/siła).
 
 Logika gry jest w `src/game/` (`moves.ts`, `gameState.ts`, `resolveTurn.ts`).
 Widok pojedynku składa się z komponentów w `src/components/`, a każdy z nich

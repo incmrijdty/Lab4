@@ -6,6 +6,7 @@ export const trollInfo: OpponentInfo = {
   name: 'Troll',
   title: 'Strażnik przełęczy',
   strength: 4,
+  maxStamina: 80,
   image: require('../../assets/enemies/troll.png'),
 };
 

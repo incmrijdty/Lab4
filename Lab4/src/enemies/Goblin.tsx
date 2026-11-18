@@ -6,6 +6,7 @@ export const goblinInfo: OpponentInfo = {
   name: 'Goblin',
   title: 'Zwinny rabuś',
   strength: 2,
+  maxStamina: 64,
   image: require('../../assets/enemies/goblin.png'),
 };
 

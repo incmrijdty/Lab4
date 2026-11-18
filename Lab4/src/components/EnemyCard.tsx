@@ -1,16 +1,16 @@
 import { Image, ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
 import { StaminaBar } from './StaminaBar';
-import { ENEMY_MAX_STAMINA } from '../enemies/types';
 
 type EnemyCardProps = {
   name: string;
   title: string;
   strength: number;
+  maxStamina: number;
   stamina: number;
   image: ImageSourcePropType;
 };
 
-export function EnemyCard({ name, title, strength, stamina, image }: EnemyCardProps) {
+export function EnemyCard({ name, title, strength, maxStamina, stamina, image }: EnemyCardProps) {
   return (
     <View style={styles.card}>
       <View style={styles.portraitFrame}>
@@ -27,7 +27,7 @@ export function EnemyCard({ name, title, strength, stamina, image }: EnemyCardPr
             <Text style={styles.strengthValue}>{strength}</Text>
           </View>
         </View>
-        <StaminaBar label="Wytrzymałość" value={stamina} maximum={ENEMY_MAX_STAMINA} />
+        <StaminaBar label="Wytrzymałość" value={stamina} maximum={maxStamina} />
       </View>
     </View>
   );
